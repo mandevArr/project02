@@ -11,12 +11,14 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
-import { UserHomeComponent } from './components/user-home/user-home.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { UserDefaultComponent } from './pages/user-default/user-default.component';
 
 @NgModule({
-  declarations: [AppComponent, UserDashboardComponent, UserHomeComponent],
+  declarations: [AppComponent, UserDashboardComponent, UserProfileComponent, UserSettingsComponent, UserDefaultComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserHomeComponent } from './components/user-home/user-home.component';
-import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
-
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { UserDefaultComponent } from './pages/user-default/user-default.component';
 
 const routes: Routes = [
   {
     path: 'user',
-    component: UserHomeComponent,
-    children: [{ path: 'dashboard', component: UserDashboardComponent }],
+    component: UserDashboardComponent,
+    children: [
+      { path: 'settings', component: UserSettingsComponent },
+      { path: 'profiles', component: UserProfileComponent },
+      { path: '', component: UserDefaultComponent },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

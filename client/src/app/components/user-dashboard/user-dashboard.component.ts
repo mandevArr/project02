@@ -3,11 +3,11 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-user-home',
-  templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.scss'],
+  selector: 'app-user-dashboard',
+  templateUrl: './user-dashboard.component.html',
+  styleUrls: ['./user-dashboard.component.scss'],
 })
-export class UserHomeComponent implements OnInit {
+export class UserDashboardComponent implements OnInit {
   constructor(iconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
     for (const tab of this.tabs) {
       iconRegistry.addSvgIcon(
@@ -17,9 +17,14 @@ export class UserHomeComponent implements OnInit {
     }
   }
   tabs: any[] = [
-    { link: 'Settings', icon: 'setting_icon' },
     {
-      link: 'Profile',
+      link: '/user/settings',
+      name: 'Settings',
+      icon: 'setting_icon',
+    },
+    {
+      link: '/user/profiles',
+      name: 'Profile',
       icon: 'user_profile_icon',
     },
   ];

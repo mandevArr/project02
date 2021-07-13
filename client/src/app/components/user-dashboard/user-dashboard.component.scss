@@ -7,7 +7,11 @@
   background: #eee;
 }
 
-.mat-list-item:hover {
-  cursor: pointer;
-  background-color: #ccc;
+.mat-list-item {
+  &:hover {
+    cursor: pointer;
+  }
+  &.active {
+    background-color: #ccc;
+  }
 }
