@@ -4,6 +4,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { UserDefaultComponent } from './pages/user-default/user-default.component';
+import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: '', component: UserDefaultComponent },
     ],
   },
+  { path: '**', component: FourOFourComponent },
 ];
 
 @NgModule({

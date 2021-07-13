@@ -16,9 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { UserDefaultComponent } from './pages/user-default/user-default.component';
+import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
 
 @NgModule({
-  declarations: [AppComponent, UserDashboardComponent, UserProfileComponent, UserSettingsComponent, UserDefaultComponent],
+  declarations: [AppComponent, UserDashboardComponent, UserProfileComponent, UserSettingsComponent, UserDefaultComponent, FourOFourComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
