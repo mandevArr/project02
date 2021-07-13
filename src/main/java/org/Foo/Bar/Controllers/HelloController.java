@@ -1,15 +1,20 @@
 package org.Foo.Bar.Controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.HashMap;
+import java.util.Map;
 
-@Controller
-@RequestMapping("/**/*")
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class HelloController {
 
-  @GetMapping
-  public String hello() {
-    return "index";
+  @ResponseBody
+  @GetMapping("/api/foo")
+  public Map<Object, Object> hello() {
+    Map<Object, Object> a = new HashMap<>();
+    a.put("a", "b");
+    return a;
   }
 }
