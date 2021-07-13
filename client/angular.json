@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Proj02-Client": {
+    "proj02-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,9 +15,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/Proj02-Client",
+            "outputPath": "dist/proj02-client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,7 +30,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            },
           },
           "configurations": {
             "production": {
@@ -54,26 +58,31 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "Proj02-Client:build"
+            "browserTarget": "proj02-client:build",
           },
           "configurations": {
             "production": {
-              "browserTarget": "Proj02-Client:build:production"
+              "browserTarget": "proj02-client:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Proj02-Client:build"
+            "browserTarget": "proj02-client:build"
           }
         },
         "test": {
@@ -110,15 +119,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Proj02-Client:serve"
+            "devServerTarget": "proj02-client:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Proj02-Client:serve:production"
+              "devServerTarget": "proj02-client:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "Proj02-Client"
+    }
+  },
+  "defaultProject": "proj02-client"
 }
