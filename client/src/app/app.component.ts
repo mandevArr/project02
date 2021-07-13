@@ -7,8 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'proj02-client';
   ngOnInit(): void {
-    fetch('/api/foo').then((d) => d.json()).then(console.log)
+
   }
 }
