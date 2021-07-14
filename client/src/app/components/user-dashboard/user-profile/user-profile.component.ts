@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class UserProfileComponent implements OnInit {
   constructor() {}
 
-  data: string;
+  data = '';
 
   ngOnInit(): void {
     fetch('/api/foo')
