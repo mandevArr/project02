@@ -9,6 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +23,8 @@ import { UserProfileComponent } from './components/user-dashboard/user-profile/u
 import { UserDefaultComponent } from './components/user-dashboard/user-default/user-default.component';
 import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
 import { HomeComponent } from './components/home/home.component';
+import { FormsModule } from '@angular/forms';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,17 +35,23 @@ import { HomeComponent } from './components/home/home.component';
     UserDefaultComponent,
     FourOFourComponent,
     HomeComponent,
+    LoginDialogComponent,
   ],
   imports: [
     HttpClientModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatButtonModule,
     MatListModule,
     MatIconModule,
     MatTabsModule,
     MatMenuModule,
     MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatSidenavModule,
   ],
   providers: [],
