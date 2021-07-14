@@ -7,6 +7,9 @@ import {
   MatListModule,
   MatIconModule,
   MatSidenavModule,
+  MatTabsModule,
+  MatMenuModule,
+  MatCardModule,
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +20,18 @@ import { UserSettingsComponent } from './components/user-dashboard/user-settings
 import { UserProfileComponent } from './components/user-dashboard/user-profile/user-profile.component';
 import { UserDefaultComponent } from './components/user-dashboard/user-default/user-default.component';
 import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, UserDashboardComponent, UserProfileComponent, UserSettingsComponent, UserDefaultComponent, FourOFourComponent],
+  declarations: [
+    AppComponent,
+    UserDashboardComponent,
+    UserProfileComponent,
+    UserSettingsComponent,
+    UserDefaultComponent,
+    FourOFourComponent,
+    HomeComponent,
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -27,8 +39,10 @@ import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
     BrowserAnimationsModule,
     MatListModule,
     MatIconModule,
-    MatSliderModule,
-    MatSidenavModule
+    MatTabsModule,
+    MatMenuModule,
+    MatCardModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

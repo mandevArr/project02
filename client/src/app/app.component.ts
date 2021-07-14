@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  // logginUser = {
+  //   username: 'Lucy'
+  // }
   ngOnInit(): void {
 
   }

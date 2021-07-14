@@ -5,8 +5,13 @@ import { UserProfileComponent } from './components/user-dashboard/user-profile/u
 import { UserSettingsComponent } from './components/user-dashboard/user-settings/user-settings.component';
 import { UserDefaultComponent } from './components/user-dashboard/user-default/user-default.component';
 import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+  },
   {
     path: 'user',
     component: UserDashboardComponent,
