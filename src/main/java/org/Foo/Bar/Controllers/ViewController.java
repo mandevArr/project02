@@ -47,9 +47,12 @@ public class ViewController {
       }), HTTPUtils.FORM_ENCODED);
     }
     ObjectMapper objectMapper = new ObjectMapper();
-    GoogleAccessToken googleAccessToken = objectMapper.readValue(res, GoogleAccessToken.class);
-    model.addAttribute("accessToken", googleAccessToken.getAccess_token());
-    model.addAttribute("idToken", googleAccessToken.getId_token());
+    try {
+      GoogleAccessToken googleAccessToken = objectMapper.readValue(res, GoogleAccessToken.class);
+      model.addAttribute("accessToken", googleAccessToken.getAccess_token());
+      model.addAttribute("idToken", googleAccessToken.getId_token());
+    } catch (Exception e) {
+    }
     return "access_token_helper";
   }
 }

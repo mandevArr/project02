@@ -40,14 +40,20 @@ export class LoginDialogComponent implements OnInit {
         `${env.googleAuthEndPoint}&redirect_uri=${env.redirectUri}&client_id=${env.googleClientID}&${env.googleScope}`,
         '_blank'
       );
+      let flag: string | null = '';
       const intervalID = setInterval(() => {
-        if (window.localStorage.getItem('__flag')) {
+        if ((flag = window.localStorage.getItem('__flag'))) {
           clearInterval(intervalID);
           window.localStorage.removeItem('__flag');
-          this.parentData.closeDialog();
-          const id_token = window.localStorage.getItem('id_token');
-          const userObj: any = JSON.parse(id_token || '{}');
-          this.parentData.setUsername(userObj['name']);
+          if (flag === 'true') {
+            this.parentData.closeDialog();
+            const id_token = window.localStorage.getItem('id_token');
+            const userObj: any = JSON.parse(id_token || '{}');
+            this.parentData.setUsername(userObj['name']);
+          } else {
+            // TODO: use dialog
+            console.error('Google Error')
+          }
         }
       }, 500);
     }

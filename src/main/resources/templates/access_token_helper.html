@@ -4,12 +4,15 @@
   <span hidden th:text="${accessToken}"></span>
   <span hidden th:text="${idToken}"></span>
   <script>
-    const jwt = document.getElementsByTagName('span')[1].innerText.split(".")[1]
-    const userinfo = decodeURIComponent(escape(window.atob(jwt.replace(/-/g, "+").replace(/_/g, "/"))))
-
-    localStorage.setItem('__flag', 'true')
-    localStorage.setItem('access_token', document.getElementsByTagName('span')[0].innerText)
-    localStorage.setItem('id_token', userinfo)
+    const jwt = document.getElementsByTagName('span')[1]?.innerText.split(".")[1]
+    if (jwt) {
+      localStorage.setItem('__flag', 'true')
+      const userinfo = decodeURIComponent(escape(window.atob(jwt.replace(/-/g, "+").replace(/_/g, "/"))))
+      localStorage.setItem('id_token', userinfo)
+      localStorage.setItem('access_token', document.getElementsByTagName('span')[0].innerText)
+    } else {
+      localStorage.setItem('__flag', 'false')
+    }
 
     setTimeout(() => window.close(), 0)
   </script>
