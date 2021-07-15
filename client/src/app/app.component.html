@@ -5,12 +5,12 @@
     <a mat-button class="mr-5" [routerLink]="['/']">Welcome</a>
   </div>
   <div>
-    <button mat-button (click)="openDialog()" *ngIf="!logginUser">Log In</button>
-    <div *ngIf="logginUser">
-      <a [matMenuTriggerFor]="menu" class="nav-menu-button">{{ logginUser.username }}</a>
+    <button mat-button (click)="openDialog()" *ngIf="!logginUser.username">Log In</button>
+    <div *ngIf="logginUser.username">
+      <button mat-button [matMenuTriggerFor]="menu">{{ logginUser.username }}</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="['/user']">Preferences</button>
-        <button mat-menu-item>Logout</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </div>
   </div>

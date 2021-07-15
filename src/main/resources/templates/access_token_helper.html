@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<body>
+  <span hidden th:text="${accessToken}"></span>
+  <span hidden th:text="${idToken}"></span>
+  <script>
+    const jwt = document.getElementsByTagName('span')[1].innerText.split(".")[1]
+    const userinfo = decodeURIComponent(escape(window.atob(jwt.replace(/-/g, "+").replace(/_/g, "/"))))
+
+    localStorage.setItem('__flag', 'true')
+    localStorage.setItem('access_token', document.getElementsByTagName('span')[0].innerText)
+    localStorage.setItem('id_token', userinfo)
+
+    setTimeout(() => window.close(), 0)
+  </script>
+</body>
+
+</html>

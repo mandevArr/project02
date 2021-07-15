@@ -5,8 +5,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class App {
+  final public static String googleClientID;
+  final public static String googleClientSecret;
 
-	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
-	}
+  static {
+    googleClientID = System.getenv("proj02_google_client_id");
+    googleClientSecret = System.getenv("proj02_google_client_secret");
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run(App.class, args);
+  }
 }
