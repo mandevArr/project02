@@ -21,7 +21,6 @@ import okhttp3.OkHttpClient;
 
 @Controller
 public class ViewController {
-  final static String CLIENT_URL = "http://localhost:4200";
   private URIParser parser;
   private HTTPUtils http;
 
@@ -33,6 +32,8 @@ public class ViewController {
 
   @GetMapping("/auth/google_redirect")
   public String GoogleAuth(HttpServletRequest req, OkHttpClient client, Model model) throws IOException {
+    String baseurl = req.getScheme() + "://"
+        + (req.getRemoteHost().equals("127.0.0.1") ? "localhost" : req.getRemoteHost()) + ":" + req.getServerPort();
     Map<String, String> qsMap = parser.parse(req.getQueryString());
     String res = "";
     // TODO: use restTemplate insteat of okhttp3
@@ -42,7 +43,7 @@ public class ViewController {
           put("code", qsMap.get("code"));
           put("client_id", SpringContextAccessor.googleClientID);
           put("client_secret", SpringContextAccessor.googleClientSecret);
-          put("redirect_uri", CLIENT_URL + "/auth/google_redirect");
+          put("redirect_uri", baseurl + "/auth/google_redirect");
           put("grant_type", "authorization_code");
         }
       }), HTTPUtils.FORM_ENCODED);
