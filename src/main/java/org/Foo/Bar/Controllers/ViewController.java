@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.Foo.Bar.App;
+import org.Foo.Bar.SpringContextAccessor;
 import org.Foo.Bar.RestObjects.GoogleAccessToken;
 import org.Foo.Bar.Services.HTTPUtils;
 import org.Foo.Bar.Services.URIParser;
@@ -35,12 +35,13 @@ public class ViewController {
   public String GoogleAuth(HttpServletRequest req, OkHttpClient client, Model model) throws IOException {
     Map<String, String> qsMap = parser.parse(req.getQueryString());
     String res = "";
+    // TODO: use restTemplate insteat of okhttp3
     if (qsMap.containsKey("code")) {
       res = http.post("https://oauth2.googleapis.com/token", http.encodeQueryString(new HashMap<String, String>() {
         {
           put("code", qsMap.get("code"));
-          put("client_id", App.googleClientID);
-          put("client_secret", App.googleClientSecret);
+          put("client_id", SpringContextAccessor.googleClientID);
+          put("client_secret", SpringContextAccessor.googleClientSecret);
           put("redirect_uri", CLIENT_URL + "/auth/google_redirect");
           put("grant_type", "authorization_code");
         }
