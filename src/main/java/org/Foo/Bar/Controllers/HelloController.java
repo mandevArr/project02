@@ -1,8 +1,11 @@
 package org.Foo.Bar.Controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import javax.swing.JSpinner.ListEditor;
 
 import org.Foo.Bar.Entities.User;
 import org.hibernate.Session;
@@ -30,7 +33,15 @@ public class HelloController {
 
     tx.commit();
     Map<Object, Object> a = new HashMap<>();
-    a.put("a", "b");
+
+    sess = sessionFactory.openSession();
+    tx = sess.beginTransaction();
+
+    List<User> list = sess.createQuery("select u from User u").list();
+    for (int i = 0; i < list.size(); i++) {
+      User u = list.get(i);
+      a.put(u.getEmail(), u.getName());
+    }
     return a;
   }
 }

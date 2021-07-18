@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     fetch('/api/foo')
-      .then((d) => d.text())
+      .then((d) => d.json())
       .then((d) => (this.data = d));
   }
 }
