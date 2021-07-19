@@ -1,10 +1,12 @@
 package org.Foo.Bar.Services;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,7 +22,10 @@ public class HTTPUtils {
 
   public String post(String url, String json, MediaType mediaType) throws IOException {
     RequestBody body = RequestBody.create(json, mediaType);
-    Request request = new Request.Builder().url(url).post(body).build();
+    Headers headers = Headers.of(new HashMap<String, String>(){{
+      put("Accept", "application/json");
+    }});
+    Request request = new Request.Builder().url(url).post(body).headers(headers).build();
     try (Response response = client.newCall(request).execute()) {
       return response.body().string();
     }

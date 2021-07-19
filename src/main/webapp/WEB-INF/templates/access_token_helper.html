@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 
 <body>
-  <span hidden th:text="${accessToken}"></span>
-  <span hidden th:text="${idToken}"></span>
+  <span hidden th:text="${authType}" id="authType"></span>
+  <span hidden th:text="${accessToken}" id="accessToken"></span>
+  <span hidden th:text="${idToken}" id="idToken"></span>
   <script>
-    const jwt = document.getElementsByTagName('span')[1]?.innerText.split(".")[1]
-    if (jwt) {
-      localStorage.setItem('__flag', 'true')
-      const userinfo = decodeURIComponent(escape(window.atob(jwt.replace(/-/g, "+").replace(/_/g, "/"))))
-      localStorage.setItem('id_token', userinfo)
-      localStorage.setItem('access_token', document.getElementsByTagName('span')[0].innerText)
-    } else {
-      localStorage.setItem('__flag', 'false')
+    const authType = document.getElementById('authType').innerText
+    if (authType === 'google') {
+      localStorage.setItem('authType', 'google')
+      const jwt = document.getElementById('idToken')?.innerText.split(".")[1]
+      if (jwt) {
+        localStorage.setItem('__flag', 'true')
+        const userInfo = decodeURIComponent(escape(window.atob(jwt.replace(/-/g, "+").replace(/_/g, "/"))))
+        localStorage.setItem('userInfo', userInfo)
+        localStorage.setItem('access_token', document.getElementById('accessToken').innerText)
+      } else {
+        localStorage.setItem('__flag', 'false')
+      }
+      setTimeout(() => window.close(), 0)
+    } else if (authType === 'github') {
+      localStorage.setItem('authType', 'github')
+      const accessToken = document.getElementById('accessToken').innerText
+      if (accessToken) {
+        localStorage.setItem('__flag', 'true')
+        localStorage.setItem('access_token', accessToken)
+        fetch('https://api.github.com/user', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }).then((d) => d.text()).then((userInfo) => {
+          localStorage.setItem('userInfo', userInfo)
+          setTimeout(() => window.close(), 0)
+        })
+      } else {
+        localStorage.setItem('__flag', 'false')
+      }
     }
-
-    setTimeout(() => window.close(), 0)
   </script>
 </body>
 

@@ -23,10 +23,15 @@ export class AppComponent implements OnInit, MatDialogData {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    let id_token: string | null = '';
-    if ((id_token = localStorage.getItem('id_token'))) {
-      const userObj = JSON.parse(id_token);
-      this.setUsername(userObj.name);
+    let userInfo: string | null = '';
+    if ((userInfo = localStorage.getItem('userInfo'))) {
+      const userObj = JSON.parse(userInfo);
+      const authType = localStorage.getItem('authType')
+      if (authType === 'google') {
+        this.setUsername(userObj.name);
+      } else if (authType === 'github') {
+        this.setUsername(userObj.login);
+      }
     }
   }
 
@@ -52,8 +57,9 @@ export class AppComponent implements OnInit, MatDialogData {
   };
 
   logout() {
-    localStorage.removeItem('id_token');
+    localStorage.removeItem('userInfo');
     localStorage.removeItem('access_token');
+    localStorage.removeItem('authType');
     this.setUsername('');
   }
 }

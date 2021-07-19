@@ -4,10 +4,14 @@
 
 export const environment = {
   production: false,
-  redirectUri: 'http://localhost:4200/auth/google_redirect',
+  googleRedirectUri: '/auth/google_redirect',
   googleAuthEndPoint: 'https://accounts.google.com/o/oauth2/auth?response_type=code',
   googleScope: 'scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile',
   googleClientID: '348579708249-qobllrgbr5rr6vs4mjvgrlg331ld0ci0.apps.googleusercontent.com',
+  githubAuthEndPoint: 'https://github.com/login/oauth/authorize?',
+  githubRedirectUri: '/auth/github_redirect',
+  githubScope: 'scope=user',
+  githubClientID: '133547b73d6187c38434',
 };
 
 /*
