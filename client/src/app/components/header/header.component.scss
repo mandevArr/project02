@@ -1,0 +1,28 @@
+.toolbar {
+  height: 60px;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.nav-menu-button {
+  padding: 0.25rem 0.5rem;
+  color: #fff;
+  &:hover {
+    cursor: pointer;
+    background-color: #ccc;
+    color: #333;
+  }
+}

@@ -6,11 +6,16 @@ import { UserSettingsComponent } from './components/user-dashboard/user-settings
 import { UserDefaultComponent } from './components/user-dashboard/user-default/user-default.component';
 import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
 import { HomeComponent } from './components/home/home.component';
+import { ShopComponent } from './components/shop/shop.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'shop',
+    component: ShopComponent,
   },
   {
     path: 'user',
