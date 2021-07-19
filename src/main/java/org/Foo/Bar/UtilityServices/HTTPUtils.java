@@ -1,4 +1,4 @@
-package org.Foo.Bar.Services;
+package org.Foo.Bar.UtilityServices;
 
 import java.io.IOException;
 import java.util.HashMap;

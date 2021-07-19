@@ -1,4 +1,4 @@
-package org.Foo.Bar.Services;
+package org.Foo.Bar.UtilityServices;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 @Service
-public class URIParser {
+public class QueryStringParser {
   public Map<String, String> parse(String qs) {
     Map<String, String> res = new HashMap<>();
     if (qs == null) {

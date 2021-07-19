@@ -9,33 +9,40 @@ import javax.servlet.http.HttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.Foo.Bar.SpringContextAccessor;
+import org.Foo.Bar.Entities.User;
 import org.Foo.Bar.RestObjects.GitHubAccessToken;
 import org.Foo.Bar.RestObjects.GoogleAccessToken;
-import org.Foo.Bar.Services.HTTPUtils;
-import org.Foo.Bar.Services.URIParser;
+import org.Foo.Bar.Services.UserService;
+import org.Foo.Bar.UtilityServices.HTTPUtils;
+import org.Foo.Bar.UtilityServices.QueryStringParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import okhttp3.OkHttpClient;
 
 @Controller
-public class ViewController {
-  private URIParser parser;
+public class OAuthController {
+  private QueryStringParser qsParser;
   private HTTPUtils http;
+  private UserService userService;
 
   @Autowired
-  public ViewController(URIParser parser, HTTPUtils http) {
-    this.parser = parser;
+  public OAuthController(QueryStringParser parser, HTTPUtils http, UserService userService) {
+    this.qsParser = parser;
     this.http = http;
+    this.userService = userService;
   }
 
   @GetMapping("/auth/google_redirect")
   public String GoogleAuth(HttpServletRequest req, OkHttpClient client, Model model) throws IOException {
     String baseurl = req.getScheme() + "://"
         + (req.getRemoteHost().equals("127.0.0.1") ? "localhost" : req.getRemoteHost()) + ":" + req.getServerPort();
-    Map<String, String> qsMap = parser.parse(req.getQueryString());
+    Map<String, String> qsMap = qsParser.parse(req.getQueryString());
     String res = "";
     // TODO: use restTemplate insteat of okhttp3
     if (qsMap.containsKey("code")) {
@@ -64,7 +71,7 @@ public class ViewController {
   public String GitHubAuth(HttpServletRequest req, OkHttpClient client, Model model) throws IOException {
     String baseurl = req.getScheme() + "://"
         + (req.getRemoteHost().equals("127.0.0.1") ? "localhost" : req.getRemoteHost()) + ":" + req.getServerPort();
-    Map<String, String> qsMap = parser.parse(req.getQueryString());
+    Map<String, String> qsMap = qsParser.parse(req.getQueryString());
     String res = "";
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -87,5 +94,17 @@ public class ViewController {
     } catch (Exception e) {
     }
     return "access_token_helper";
+  }
+
+  @ResponseBody
+  @PostMapping("/auth/google_redirect_persist")
+  public void GoogleUserPersist(@RequestBody User user) {
+    userService.persistUser(user);
+  }
+
+  @ResponseBody
+  @PostMapping("/auth/github_redirect_persist")
+  public void GitHubUserPersist(@RequestBody User user) {
+    userService.persistUser(user);
   }
 }
