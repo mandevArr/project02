@@ -2,9 +2,9 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { UserManagementService } from './services/user-management.service';
 
 export interface MatDialogData {
-  setUsername: (name: string) => void;
   closeDialog: () => void;
 }
 
@@ -14,25 +14,12 @@ export interface MatDialogData {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, MatDialogData {
-  logginUser: any = {
-    username: '',
-  };
-
   matDialogref: MatDialogRef<LoginDialogComponent> | null = null;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, public um: UserManagementService) {}
 
   ngOnInit(): void {
-    let userInfo: string | null = '';
-    if ((userInfo = localStorage.getItem('userInfo'))) {
-      const userObj = JSON.parse(userInfo);
-      const authType = localStorage.getItem('authType')
-      if (authType === 'google') {
-        this.setUsername(userObj.name);
-      } else if (authType === 'github') {
-        this.setUsername(userObj.login);
-      }
-    }
+    this.um.initSync()
   }
 
   openDialog() {
@@ -41,7 +28,6 @@ export class AppComponent implements OnInit, MatDialogData {
       {
         autoFocus: false,
         data: {
-          setUsername: this.setUsername,
           closeDialog: this.closeDialog,
         },
       }
@@ -51,15 +37,4 @@ export class AppComponent implements OnInit, MatDialogData {
   closeDialog = () => {
     this.matDialogref?.close();
   };
-
-  setUsername = (name: string) => {
-    this.logginUser.username = name;
-  };
-
-  logout() {
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('authType');
-    this.setUsername('');
-  }
 }

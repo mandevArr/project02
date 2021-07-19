@@ -25,6 +25,8 @@ import { FourOFourComponent } from './pages/four-ofour/four-ofour.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { UserManagementService } from './services/user-management.service';
+import { OAuth2Service } from './services/oauth2.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,10 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
     MatInputModule,
     MatSidenavModule,
   ],
-  providers: [],
+  providers: [
+    UserManagementService,
+    OAuth2Service,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
