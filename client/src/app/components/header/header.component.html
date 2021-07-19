@@ -6,6 +6,9 @@
     <a mat-button class="mr-5" [routerLink]="['/shop']">Shop</a>
   </div>
   <div>
+    <button *ngIf="um.loggedInUser.username" mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+      Notications
+    </button>
     <button mat-button (click)="openDialog()" *ngIf="!um.loggedInUser.username">Log In</button>
     <div *ngIf="um.loggedInUser.username">
       <button mat-button [matMenuTriggerFor]="menu">{{ um.loggedInUser.username }}</button>

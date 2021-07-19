@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,6 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatBadgeModule } from '@angular/material/badge';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -58,11 +61,9 @@ import { UserManagementService } from './services/user-management.service';
     MatInputModule,
     MatSidenavModule,
     MatGridListModule,
+    MatBadgeModule,
   ],
-  providers: [
-    UserManagementService,
-    OAuth2Service,
-  ],
+  providers: [UserManagementService, OAuth2Service],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

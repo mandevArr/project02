@@ -19,10 +19,10 @@ export class AppComponent implements OnInit, MatDialogData {
   constructor(private dialog: MatDialog, public um: UserManagementService) {}
 
   ngOnInit(): void {
-    this.um.initSync()
+    this.um.initSync();
   }
 
-  openDialog() {
+  openDialog = () => {
     this.matDialogref = this.dialog.open<LoginDialogComponent, MatDialogData>(
       LoginDialogComponent,
       {
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, MatDialogData {
         },
       }
     );
-  }
+  };
 
   closeDialog = () => {
     this.matDialogref?.close();
